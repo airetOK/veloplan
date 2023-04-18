@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VeloPlan</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+</head>
+<body>
+    <!-- start submit form -->
+    <form action="/save" method="post" class="form-inline mt-5 ml-2 mb-5">
+        <div class="form-group mr-2">
+            <label for="formDate"></label>
+            <input type="date" id="formDate" name="date" required>
+        </div>
+        <div class="form-group mr-2">
+            <label for="inputKm"></label>
+            <input type="number" min="0" id="inputKm" placeholder="Enter km" name="km" required>
+        </div>
+        <button type="submit" class="btn btn-link">Save</button>
+    </form>
+    <!-- end submit form -->
+
+    <!-- start goal for a week -->
+    <span class="ml-2">
+        <strong>Goal: </strong>{{ goal }}
+    </span>
+    <!-- end goal for a week -->
+
+    <!-- start list of activities per week -->
+    <table class="table mt-5">
+        <thead>
+            <tr>
+                <th scope="col">Week</th>
+                <th scope="col">Date training</th>
+                <th scope="col">Type of training</th>
+                <th scope="col">Km</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for plan in plan_list %}
+            <tr>
+                <td>{{ plan[0] }}</td>
+                <td>{{ plan[1] }}</td>
+                <td>{{ plan[2] }}</td>
+                <td>{{ plan[3] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <!-- end list of activities per week -->
+
+    <!-- start submit button -->
+    {% if is_week_complete %}
+    <form action="/verify" method="post">
+        <input type="hidden" value="{{ plan_list }}" name="plan_list">
+        <button type="submit" class="btn btn-dark ml-5">Verify</button>
+    </form>
+    {% else %}
+    <form>
+        <button type="submit" class="btn btn-dark ml-5" disabled>Verify</button>
+    </form>
+    {% endif %}
+    <!-- end submit button -->
+</body>
+</html>
