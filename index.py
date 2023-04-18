@@ -52,10 +52,3 @@ def verify_week_plan():
 
     plan_complete_repository.update_plan_complete_for_week(week)
     return redirect(url_for('get_plan'))
-
-
-def create_app():
-    return app
-
-
-app.run()
