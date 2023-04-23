@@ -15,7 +15,7 @@ from service.veloplanservice import VeloplanService
 app = Flask(__name__)
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
-app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(hours=24)
+app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(hours=23)
 Session(app)
 
 plan_complete_repository = PlanCompleteRepository('data/plan_complete.csv')
