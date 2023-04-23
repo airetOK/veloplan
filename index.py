@@ -19,7 +19,7 @@ app.config['SESSION_TYPE'] = 'redis'
 app.config['SESSION_PERMANENT'] = False
 app.config['SESSION_USE_SIGNER'] = True
 app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(hours=23)
-app.config['SESSION_REDIS'] = redis.from_url(os.getenv('REDIS_URL'))
+app.config['SESSION_REDIS'] = redis.from_url(f'redis://{os.getenv("REDIS_URL")}')
 
 Session(app)
 
@@ -96,3 +96,6 @@ def login():
             return redirect(url_for('login'))
         session['password'] = password
     return redirect(url_for('get_plan'))
+
+
+app.run()
