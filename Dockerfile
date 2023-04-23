@@ -7,7 +7,7 @@ RUN pip3 install -r requirements.txt
 COPY . .
 
 ENV FLASK_APP=index.py
-ENV password={password}
+ENV PASSWORD={password}
 
 CMD ["python3", "-m" , "flask", "run", "--host=0.0.0.0"]
 EXPOSE 5000

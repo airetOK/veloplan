@@ -83,7 +83,7 @@ def login():
         return render_template('login.html')
     else:
         password = request.form.get('password')
-        if password != os.getenv('password'):
+        if password != os.getenv('PASSWORD'):
             return redirect(url_for('login'))
         session['password'] = password
     return redirect(url_for('get_plan'))
