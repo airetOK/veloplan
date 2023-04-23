@@ -5,6 +5,7 @@ from functools import wraps
 from flask import Flask, render_template, request, redirect, url_for, session
 import ast
 from flask_session import Session
+import redis
 
 from entity.veloplan import Veloplan
 from repository.plancompleterepository import PlanCompleteRepository
@@ -13,9 +14,13 @@ from service.activityservice import ActivityService
 from service.veloplanservice import VeloplanService
 
 app = Flask(__name__)
-app.config["SESSION_PERMANENT"] = False
-app.config["SESSION_TYPE"] = "filesystem"
+app.secret_key = os.getenv('SECRET_KEY')
+app.config['SESSION_TYPE'] = 'redis'
+app.config['SESSION_PERMANENT'] = False
+app.config['SESSION_USE_SIGNER'] = True
 app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(hours=23)
+app.config['SESSION_REDIS'] = redis.from_url(os.getenv('REDIS_URL'))
+
 Session(app)
 
 plan_complete_repository = PlanCompleteRepository('data/plan_complete.csv')
