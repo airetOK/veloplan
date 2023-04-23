@@ -86,14 +86,10 @@ def verify_week_plan():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    print(request.method)
     if request.method == 'GET':
         return render_template('login.html')
     else:
         password = request.form.get('password')
-        print(os.getenv('PASSWORD'))
-        print(password)
-        print(os.getenv('PASSWORD') == password)
         if password != os.getenv('PASSWORD'):
             return redirect(url_for('login'))
         session['password'] = password
