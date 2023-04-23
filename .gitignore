@@ -3,9 +3,6 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-# Session info
-flask_session
-
 # C extensions
 *.so
 
